@@ -31,6 +31,29 @@ mixin _$UserStore on UserStoreBase, Store {
     });
   }
 
+  late final _$usersAtom = Atom(name: 'UserStoreBase.users', context: context);
+
+  @override
+  ObservableList<UserModel> get users {
+    _$usersAtom.reportRead();
+    return super.users;
+  }
+
+  @override
+  set users(ObservableList<UserModel> value) {
+    _$usersAtom.reportWrite(value, super.users, () {
+      super.users = value;
+    });
+  }
+
+  late final _$getUsersAsyncAction =
+      AsyncAction('UserStoreBase.getUsers', context: context);
+
+  @override
+  Future<void> getUsers() {
+    return _$getUsersAsyncAction.run(() => super.getUsers());
+  }
+
   late final _$UserStoreBaseActionController =
       ActionController(name: 'UserStoreBase', context: context);
 
@@ -49,6 +72,7 @@ mixin _$UserStore on UserStoreBase, Store {
   String toString() {
     return '''
 name: ${name},
+users: ${users},
 hasName: ${hasName}
     ''';
   }

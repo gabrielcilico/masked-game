@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:masked_game/design/stores/user_store.dart';
 import 'package:masked_game/design/theme/palette.dart';
+import 'package:masked_game/stores/user_store.dart';
 import 'package:masked_game/widgets/button/start_button.dart';
 import 'package:masked_game/widgets/input/input_text_field.dart';
 

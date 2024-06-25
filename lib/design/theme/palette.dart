@@ -35,14 +35,14 @@ class Palette {
   static const Color filePickerBackground = Color(0xFFFAF9FB);
 
   // Players Colors
-  static const Color player1 = Color(0xFF973131);
-  static const Color player2 = Color(0xFFFFC700);
-  static const Color player3 = Color(0xFF219C90);
-  static const Color player4 = Color(0xFF5A639C);
-  static const Color player5 = Color(0xFFC80036);
-  static const Color player6 = Color(0xFF0C1844);
-  static const Color player7 = Color(0xFFAF47D2);
-  static const Color player8 = Color(0xFF6F4E37);
+  static const Color player1 = Color(0xFFC62021);
+  static const Color player2 = Color(0xFFFD7F21);
+  static const Color player3 = Color(0xFFFDDF40);
+  static const Color player4 = Color(0xFF3FC621);
+  static const Color player5 = Color(0xFF20DFC7);
+  static const Color player6 = Color(0xFF203FC7);
+  static const Color player7 = Color(0xFFC620E0);
+  static const Color player8 = Color(0xFF634529);
 
   // Buttons
   static const Color buttonStartBorder = Color(0xFF365E32);
