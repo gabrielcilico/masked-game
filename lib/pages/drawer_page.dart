@@ -8,14 +8,14 @@ import 'package:masked_game/stores/user_store.dart';
 import 'package:masked_game/widgets/game/drawing_board.dart';
 import 'package:masked_game/widgets/game/user_list.dart';
 
-class SecondPage extends StatefulWidget {
-  const SecondPage({super.key});
+class DrawerPage extends StatefulWidget {
+  const DrawerPage({super.key});
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<DrawerPage> createState() => _DrawerPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _DrawerPageState extends State<DrawerPage> {
   final UserStore userStore = GetIt.I.get();
   final DrawerBoardStore store = GetIt.I.get();
 

@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
               StartButton(
                   text: 'COMEÇAR',
                   onPressed: () {
-                    context.go('/second');
+                    context.go('/drawer');
                   }),
             ],
           ),
