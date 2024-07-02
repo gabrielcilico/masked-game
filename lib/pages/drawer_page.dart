@@ -23,6 +23,13 @@ class _DrawerPageState extends State<DrawerPage> {
   void initState() {
     super.initState();
     userStore.getUsers();
+    store.connect();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    store.disconnect();
   }
 
   @override
@@ -32,7 +39,7 @@ class _DrawerPageState extends State<DrawerPage> {
         child: Observer(builder: (context) {
           return Container(
             padding: const EdgeInsets.all(16),
-            color: Palette.white,
+            color: Palette.gray,
             child: Stack(
               children: [
                 SizedBox(

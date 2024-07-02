@@ -9,18 +9,50 @@ part of 'match_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$MatchStore on MatchStoreBase, Store {
-  late final _$scoreAtom = Atom(name: 'MatchStoreBase.score', context: context);
+  Computed<List<UserModel>>? _$playersComputed;
 
   @override
-  int get score {
-    _$scoreAtom.reportRead();
-    return super.score;
+  List<UserModel> get players =>
+      (_$playersComputed ??= Computed<List<UserModel>>(() => super.players,
+              name: 'MatchStoreBase.players'))
+          .value;
+  Computed<UserModel>? _$currentPlayerComputed;
+
+  @override
+  UserModel get currentPlayer => (_$currentPlayerComputed ??=
+          Computed<UserModel>(() => super.currentPlayer,
+              name: 'MatchStoreBase.currentPlayer'))
+      .value;
+
+  late final _$matchIdAtom =
+      Atom(name: 'MatchStoreBase.matchId', context: context);
+
+  @override
+  String get matchId {
+    _$matchIdAtom.reportRead();
+    return super.matchId;
   }
 
   @override
-  set score(int value) {
-    _$scoreAtom.reportWrite(value, super.score, () {
-      super.score = value;
+  set matchId(String value) {
+    _$matchIdAtom.reportWrite(value, super.matchId, () {
+      super.matchId = value;
+    });
+  }
+
+  late final _$currentPlayerUserIdAtom =
+      Atom(name: 'MatchStoreBase.currentPlayerUserId', context: context);
+
+  @override
+  String get currentPlayerUserId {
+    _$currentPlayerUserIdAtom.reportRead();
+    return super.currentPlayerUserId;
+  }
+
+  @override
+  set currentPlayerUserId(String value) {
+    _$currentPlayerUserIdAtom.reportWrite(value, super.currentPlayerUserId, () {
+      super.currentPlayerUserId = value;
     });
   }
 
@@ -28,22 +60,11 @@ mixin _$MatchStore on MatchStoreBase, Store {
       ActionController(name: 'MatchStoreBase', context: context);
 
   @override
-  void incrementScore() {
+  void startPlaying() {
     final _$actionInfo = _$MatchStoreBaseActionController.startAction(
-        name: 'MatchStoreBase.incrementScore');
+        name: 'MatchStoreBase.startPlaying');
     try {
-      return super.incrementScore();
-    } finally {
-      _$MatchStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void decrementScore() {
-    final _$actionInfo = _$MatchStoreBaseActionController.startAction(
-        name: 'MatchStoreBase.decrementScore');
-    try {
-      return super.decrementScore();
+      return super.startPlaying();
     } finally {
       _$MatchStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -52,7 +73,10 @@ mixin _$MatchStore on MatchStoreBase, Store {
   @override
   String toString() {
     return '''
-score: ${score}
+matchId: ${matchId},
+currentPlayerUserId: ${currentPlayerUserId},
+players: ${players},
+currentPlayer: ${currentPlayer}
     ''';
   }
 }

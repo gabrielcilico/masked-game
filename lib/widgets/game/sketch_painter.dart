@@ -41,8 +41,6 @@ class SketchPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeWidth = 4.0;
 
-      print('painting ${sketch.color}');
-
       canvas.drawPath(path, paint);
     }
   }

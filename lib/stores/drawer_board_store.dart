@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:masked_game/design/theme/palette.dart';
+import 'package:masked_game/models/points.dart';
 import 'package:masked_game/models/sketch_model.dart';
+import 'package:masked_game/repositories/socket_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'drawer_board_store.g.dart';
@@ -8,6 +10,8 @@ part 'drawer_board_store.g.dart';
 class DrawerBoardStore = DrawerBoardStoreBase with _$DrawerBoardStore;
 
 abstract class DrawerBoardStoreBase with Store {
+  final SocketRepository socketRepository = SocketRepository();
+
   @observable
   ObservableList<SketchModel> sketches = ObservableList<SketchModel>();
 
@@ -46,6 +50,14 @@ abstract class DrawerBoardStoreBase with Store {
     var currentSketchCopy = currentSketch.value;
     if (currentSketchCopy != null) {
       currentSketchCopy.points.add(offset);
+      if (currentSketchCopy.points.length > 1000) {
+        var toRemove = currentSketchCopy.points.length - 1000;
+        currentSketchCopy.points.removeRange(0, toRemove);
+      }
+      socketRepository.emitDraw(
+        Points(x: offset.dx, y: offset.dy),
+        color.toString(),
+      );
       currentSketch = Observable(currentSketchCopy);
     }
   }
@@ -68,5 +80,15 @@ abstract class DrawerBoardStoreBase with Store {
   @action
   void clearSketch() {
     sketches.clear();
+  }
+
+  @action
+  void connect() {
+    socketRepository.connect();
+  }
+
+  @action
+  void disconnect() {
+    socketRepository.disconnect();
   }
 }
